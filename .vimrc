@@ -1,12 +1,14 @@
 set nocompatible      " Nécessaire
 filetype off          " Nécessaire
 
-" Ajout de Vundle au runtime path et initialisation
+set path+=**
+set wildmenu
+set tags=tags
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-    
-" On indique à Vundle de s'auto-gérer :)
-Plugin 'gmarik/Vundle.vim'  " Nécessaire
+
+Plugin 'gmarik/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tmhedberg/SimpylFold'
 Bundle 'Valloric/YouCompleteMe'
@@ -14,15 +16,14 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'airblade/vim-gitgutter'
 
-" 
-" C'est ici que vous allez placer la liste des plugins que Vundle doit gérer
-"
-
-call vundle#end()            " Nécessaire
+call vundle#end()
 filetype plugin indent on    " Nécessaire
 
-au BufNewFile,BufRead *.py;
+au BufNewFile,BufRead *;
     \ set tabstop=4
     \ set softtabstop=4
     \ set shiftwidth=4
@@ -31,12 +32,17 @@ au BufNewFile,BufRead *.py;
     \ set autoindent
     \ set fileformat=unix
 
+autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype lua setlocal ts=4 sts=4 sw=4 expandtab
+
 set laststatus=2
 if !has('gui_running')
       set t_Co=256
 endif
 
-"split navigations
+" split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -58,3 +64,6 @@ syntax on
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 set nu
+nnoremap <C-N><C-N> :set invnumber<CR>
+nnoremap <C-G><C-G> :GitGutterSignsToggle<CR>
+map <silent> <C-M> :NERDTreeToggle<CR>
