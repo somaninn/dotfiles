@@ -1,1 +1,1 @@
-# favorite_settings
+# dotfiles
