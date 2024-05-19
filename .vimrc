@@ -19,6 +19,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'wellle/context.vim'
 
 call vundle#end()
 filetype plugin indent on    " Nécessaire
@@ -64,6 +65,15 @@ syntax on
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 set nu
+set cursorline
+:hi CursorLine   cterm=NONE ctermbg=black guibg=black 
+:hi CursorColumn cterm=NONE ctermbg=black guibg=black 
+set scrolloff=8
+
 nnoremap <C-N><C-N> :set invnumber<CR>
 nnoremap <C-G><C-G> :GitGutterSignsToggle<CR>
 map <silent> <C-M> :NERDTreeToggle<CR>
+
+command! PrettyPrintJSON %!python -m json.tool
+command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
+command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
